@@ -1,0 +1,8 @@
+.centre-align{
+    margin: auto;
+}
+.text-align{
+    text-align: center;
+    justify-content: center;
+    color: grey;
+}
