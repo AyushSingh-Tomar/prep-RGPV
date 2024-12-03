@@ -31,7 +31,7 @@ return res.status(500).json({
 });
 }
 }
-export const login = async(req,re)=>{
+export const login = async(req,res)=>{
     try{
         const {email,password}=req.body;
         if( !email || !password){
@@ -40,6 +40,21 @@ export const login = async(req,re)=>{
                 message:"Not all of the fields have value"
             })
         }
+        const user = await User.findOne({email});
+        if(!user){
+            return res.status(400).json({
+                success: false,
+                message:"User not found! incorrect email or password"
+            });
+        }
+        const passwordVerification = await bcrypt.compare(password,user.password)
+        if(!passwordVerification){
+            return res.status(400).json({
+                success: false,
+                message:"User not found! incorrect email or password"
+            });
+        }
+        generateToken(res,user,`Welcome Back ${user.name}!`)
     }
     catch(err){
         console.log(err);

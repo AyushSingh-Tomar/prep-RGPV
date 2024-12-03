@@ -4,7 +4,7 @@ import connectDB from "./DB/dbConnect.js";
 dotenv.config({});
 connectDB();
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT,()=>{
 console.log(
     `listening on ${PORT}`
